@@ -1,7 +1,7 @@
 # shiva
 
-Small DoS (or DDoS if you count multithreading) that currently hold two methods, udp and syn flooding.
-Along with other tweaks the user can change such as flood time, tread count, and method switch.
+Small DoS (or DDoS if you count multithreading) that currently holds two attack methods, udp and syn flooding.
+Also comes with other tweaks the user can change such as flood time (in seconds), thread count, and method switch.
 
 
 # Requires
