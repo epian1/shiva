@@ -2,7 +2,7 @@
 
 # Requires
 
-* (Python3.x+) {https://www.python.org/downloads/release/python-350/}
+* [Python3.x+] (https://www.python.org/downloads/release/python-350/)
 
 # Examples
 ```
