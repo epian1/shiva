@@ -2,6 +2,7 @@
 
 # Requires
 * [Python3.x+](http://www.dropwizard.io/1.0.2/docs/)
+* Root access. (must run sudo as shown below)
 
 # Examples
 ```
