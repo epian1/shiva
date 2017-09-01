@@ -1,7 +1,7 @@
 # shiva
 
 # Requires
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Python3.x+](http://www.dropwizard.io/1.0.2/docs/)
 
 # Examples
 ```
