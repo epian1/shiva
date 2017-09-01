@@ -1,6 +1,8 @@
 # shiva
 
-Requires Python3.x
+# Requires
+
+* (Python3.x+) {https://www.python.org/downloads/release/python-350/}
 
 # Examples
 ```
