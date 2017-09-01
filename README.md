@@ -1,6 +1,7 @@
 # shiva
 
-Pretty simple DoS tool written in Python, 90% of credit goes to scapy...to be totally honest.
+Small DoS (or DDoS if you count multithreading) that currently hold two methods, udp and syn flooding.
+Along with other tweaks the user can change such as flood time, tread count, and method switch.
 
 
 # Requires
@@ -9,8 +10,11 @@ Pretty simple DoS tool written in Python, 90% of credit goes to scapy...to be to
 
 # Examples
 ```
-sudo python3 main.py
+sudo python3 main.py -h
 ```
 ```
 sudo python3 main.py -v 127.0.0.1 -d 80 -m udp -t 60 -p 10
+```
+```
+sudo python3 main.py -v 127.0.0.1 -d 80 -m syn -t 60 -p 10
 ```
