@@ -1,5 +1,8 @@
 # shiva
 
+Pretty simple DoS tool written in Python, 90% of credit goes to scapy...to be totally honest.
+
+
 # Requires
 * [Python3.x+](http://www.dropwizard.io/1.0.2/docs/)
 * Root access. (must run sudo as shown below)
