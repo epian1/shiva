@@ -1,8 +1,7 @@
 # shiva
 
 # Requires
-
-* [Python3.x+] (https://www.python.org/downloads/release/python-350/)
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 
 # Examples
 ```
