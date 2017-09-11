@@ -3,7 +3,7 @@
 Small DoS (or DDoS if you count multithreading) that currently holds two attack methods, udp and syn flooding.
 Also comes with other tweaks the user can change such as flood time (in seconds), thread count, and method switch.
 
-comments, concerns or critizim find me here: https://discord.gg/RBEd8h
+comments, conserns or criticism find me here: https://discord.gg/RBEd8h
 
 
 # Requires
