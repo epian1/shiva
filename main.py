@@ -5,17 +5,18 @@ from savitr.zeus import strike
 
 usage = """\n\n
 
-Example: -v 127.0.0.1 -d 80 -m udp -t 10 -p 6   (Does not need to be in order)
+Example: -v 127.0.0.1 -d 80 -m udp -t 10 -p 6 -s .4  (Does not need to be in order)
 
-Options:
- ______________________________________________________
-|                                                      |
-|-v, --victim      | The IP address.                   |
-|-d, --destination | The targeted Port number.         |
-|-m, --method      | The attack Method.                |
-|-p, --processes   | The Thread count.                 |
-|-t, --time        | The attack Time length in seconds.|
-|______________________________________________________|
+Options: (everything but victim has a default value if not given one)
+ ______________________________________________________________
+|                                                              |
+|-v, --victim      | The IP address.                           |
+|-d, --destination | The targeted Port number.                 |
+|-m, --method      | The attack Method.                        |
+|-p, --processes   | The Thread count.                         |
+|-t, --time        | The attack Time length in second(s).      |
+|-s, --sleep       | The time between each packet in second(s).|
+|______________________________________________________________|
  """
 
 parser = optparse.OptionParser(description="User options", usage=usage)
@@ -35,6 +36,7 @@ parser.add_option(
         action='store',
         dest='darg',
         type=int,
+        default=80,
         help='The host Port number.'
     )
 parser.add_option(
@@ -44,6 +46,7 @@ parser.add_option(
         action='store',
         dest='marg',
         type=str,
+        default='udp',
         help='The attack Method.'
     )
 parser.add_option(
@@ -53,6 +56,7 @@ parser.add_option(
         action='store',
         dest='parg',
         type=int,
+        default=3,
         help='The Thread count.'
     )
 parser.add_option(
@@ -62,8 +66,20 @@ parser.add_option(
         action='store',
         dest='targ',
         type=int,
+        default=5,
         help='The attack Time.'
     )
+
+parser.add_option(
+
+    '-s',
+    '--sleep',
+    action='store',
+    dest='sarg',
+    type=float,
+    default=.4,
+    help='time between each packet sent in second(s).'
+)
 
 NULLVALUE = False
 
@@ -80,32 +96,27 @@ ARGUMENT_DIC = {
     'destination/Port': options.darg,
     'method/UDP,SYN': options.marg,
     'threads': options.parg, #  -p/--processes
-    'time/Seconds': options.targ
+    'time/Seconds': options.targ,
+    'sleep': options.sarg
 }
+
+
+usr_opt = """\n\n
+Victim  | {victim/IP address}
+Port    | {destination/Port}
+Method  | {method/UDP,SYN}
+Threads | {threads}
+Time    | {time/Seconds}
+Sleep   | {sleep}
+""".format(**ARGUMENT_DIC)
 
 
 
 def main():
-    'Basically checks that all parameters are filled out.'
-    global NULLVALUE
+
+    print (usr_opt); input("\nPRESS ENTER TO CONTINUE. (Ctrl+z to exit)")
 
     loop = asyncio.get_event_loop()
-
-    print ('\n[*]\tYour settings\n')
-
-    for arg_value in ARGUMENT_DIC.items():
-
-        if arg_value[1] is not None:
-
-            print ("{} : {}".format(arg_value[0], arg_value[1]))
-
-        else: NULLVALUE = True
-
-    if NULLVALUE == True:
-
-        print('\n[!!]\tYou have a None value in a slot, please have a correct type value for each parameter.'
-              '\n\nExample:\t-v 127.0.0.1 -d 80 -m UDP -t 60 -p 3'
-              '\nDOES NOT HAVE TO BE IN SAME ORDER'); raise SystemExit
 
     loop.run_until_complete(strike(**ARGUMENT_DIC))
     loop.close()
@@ -117,4 +128,3 @@ def main():
 if __name__ == '__main__':
     'execute'
     main()
-
