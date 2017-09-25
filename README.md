@@ -5,7 +5,7 @@ User friendly command-line based SYN & UDP attack script that lets the user have
 comments, conserns or criticism find me here: https://discord.gg/cKv2DMF
 
 # Usage
-* The only option you have to give an argument to is -v, --victim. The rest are given reasonable deafault values if no argument is given an option.
+* The only option you have to give an argument to is -v, --victim. The rest are given reasonable deafault values if no option is given an argument.
 
 -v, --victim      | The IP address.                             
 -d, --destination | The targeted Port number.                   
