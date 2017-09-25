@@ -23,8 +23,8 @@ comments, conserns or criticism find me here: https://discord.gg/cKv2DMF
 sudo python3 main.py -h
 ```
 ```
-sudo python3 main.py -v 127.0.0.1 -d 80 -m udp -t 60 -p 10
+sudo python3 main.py -v 127.0.0.1 -d 80 -m udp -t 60 -p 10 -s .1
 ```
 ```
-sudo python3 main.py -v 127.0.0.1 -d 80 -m syn -t 60 -p 10
+sudo python3 main.py -v 127.0.0.1 -d 80 -m syn -t 60 -p 10 -s .1
 ```
