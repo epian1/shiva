@@ -6,15 +6,13 @@ Also comes with other tweaks the user can change such as flood time (in seconds)
 comments, conserns or criticism find me here: https://discord.gg/cKv2DMF
 
 # Usage
- ________________________________________________________________
-|                                                                |
-|-v, --victim      | The IP address.                             |
-|-d, --destination | The targeted Port number.                   |
-|-m, --method      | The attack Method.                          |
-|-p, --processes   | The Thread count.                           |
-|-t, --time        | The attack Time length in second(s).        |
-|-s, --sleep       | The time between each packet in second(s).  |
-|________________________________________________________________|
+-v, --victim      | The IP address.                             
+-d, --destination | The targeted Port number.                   
+-m, --method      | The attack Method.                          
+-p, --processes   | The Thread count.                         
+-t, --time        | The attack Time length in second(s).        
+-s, --sleep       | The time between each packet in second(s).  
+
 
 # Requires
 * [Python3.x+](http://www.dropwizard.io/1.0.2/docs/)
