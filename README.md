@@ -1,6 +1,6 @@
 # shiva
 
-User friendly command-line based SYN & UDP attack script that lets the user have complete control over the script settings (listed below), also displays attack review (shows inputed settings, if the user is happy they can continue else they can quit and re-enter value(s)) & summary.
+command-line based SYN & UDP (D)DoS script. More info below.
 
 comments, conserns or criticism find me here: https://discord.gg/cKv2DMF
 
