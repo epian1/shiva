@@ -1,12 +1,7 @@
 import  time, random, string, threading
 
 from sys import stdout
-
-try:
-    from thirdparty.scapy.all import *
-except ImportError:
-    stdout.write("\n[!!]\tWas unable to import 'scapy.all' from directory 'thirdparty/scapy'")
-
+from thirdparty.all import *
 
 random_data = ''.join([random.choice(string.ascii_letters + string.digits)for x in range(65000)])
 
