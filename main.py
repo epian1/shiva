@@ -4,12 +4,7 @@ from os import system
 from sys import version,stdout
 from socket import gethostbyaddr
 
-try:
-    from savitr.zeus import udp_strike, syn_strike
-except ImportError:
-    stdout.write("\n[!!]\tWas unable to import 'zeus.py' from directory 'shiva/savitr'")
-    raise SystemExit
-
+from savitr.zeus import *
 
 #sudo python3 main.py -v 127.0.0.1 -d 80 -m UDP -t 60 -p 3
 
